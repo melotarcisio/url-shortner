@@ -1,0 +1,36 @@
+version: "3.4"
+services:
+  db:
+    image: postgres:12
+    env_file:
+      - .env
+    ports:
+      - "5435:5432"
+    networks:
+      - app_net
+    volumes:
+      - ./db-data:/var/lib/postgresql/data/pgdata
+
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - RESTART=true
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - app_net
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: bash -c "python -m database.migrate && poetry run python -m main"
+
+networks:
+  app_net:
+    driver: bridge

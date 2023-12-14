@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "test-environ"
+version = "0.1.0"
+description = ""
+authors = ["tarcisio-melo-sp <melotarcisio@hotmail.com>"]
+readme = "README.md"
+packages = [{include = "test_environ"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.105.0"
+uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+pydantic = "^2.5.2"
+pydantic-settings = "^2.1.0"
+psycopg2-binary = "^2.9.9"
+python-dotenv = "^1.0.0"
+beautifulsoup4 = "^4.12.2"
+pytest = "^7.4.3"
+httpx = "^0.25.2"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
